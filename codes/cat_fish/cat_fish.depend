@@ -1,9 +1,10 @@
 # depslib dependency file v1.0
-1682047542 source:/home/baba/products/cat_fish/codes/cat_fish/main.cpp
+1682298613 source:/home/baba/products/cat_fish/codes/cat_fish/main.cpp
 	<iostream>
 	<opencv2/core/core.hpp>
 	<opencv2/imgproc/imgproc.hpp>
 	<opencv2/highgui/highgui.hpp>
+	<opencv2/dnn.hpp>
 
 1675824335 /usr/local/include/opencv4/opencv2/core/core.hpp
 	"opencv2/core.hpp"
@@ -217,4 +218,38 @@
 
 1675845688 /usr/local/include/opencv4/opencv2/videoio.hpp
 	"opencv2/core.hpp"
+
+1675824335 /usr/local/include/opencv4/opencv2/dnn.hpp
+	<opencv2/dnn/dnn.hpp>
+
+1675845688 /usr/local/include/opencv4/opencv2/dnn/dnn.hpp
+	<vector>
+	<opencv2/core.hpp>
+	"opencv2/core/async.hpp"
+	"../dnn/version.hpp"
+	<opencv2/dnn/dict.hpp>
+	<opencv2/dnn/layer.hpp>
+	<opencv2/dnn/dnn.inl.hpp>
+	<opencv2/dnn/utils/inference_engine.hpp>
+
+1675824335 /usr/local/include/opencv4/opencv2/core/async.hpp
+	<opencv2/core/mat.hpp>
+	<chrono>
+
+1675845688 /usr/local/include/opencv4/opencv2/dnn/version.hpp
+
+1675845688 /usr/local/include/opencv4/opencv2/dnn/dict.hpp
+	<opencv2/core.hpp>
+	<map>
+	<ostream>
+	<opencv2/dnn/dnn.hpp>
+
+1675845688 /usr/local/include/opencv4/opencv2/dnn/layer.hpp
+	<opencv2/dnn.hpp>
+
+1675845688 /usr/local/include/opencv4/opencv2/dnn/dnn.inl.hpp
+	<opencv2/dnn.hpp>
+
+1675845688 /usr/local/include/opencv4/opencv2/dnn/utils/inference_engine.hpp
+	"../dnn.hpp"
 
