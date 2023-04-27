@@ -3,18 +3,54 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/dnn.hpp>
+
 //using namespace cv;
 using namespace std;
+
+//read image for classifing from user inputing.
+cv::Mat readImage();
+//picture classify
+void classifyPicture();
+
 int main(int argc, char *argv[])
 {
-    //cout <<"argc=" << argc << endl << argv[1] << endl << *(argv+1) << endl;;
+    char c;
+    while(c != 'n')
+    {
+        classifyPicture();
+        cout << "Press 'n' for escaping, 'y' for continue." << endl;
+        cin >> c ;
+        cout << endl;
+
+
+    }
+
+    return 0;
+}
+
+cv::Mat readImage()
+{
     std::string fn;
     cout << "Input image name for classify:";
     cin >> fn;
     cout << fn << endl;
     cv::Mat img = cv::imread(fn, cv::IMREAD_COLOR);
+    return img;
+}
+
+void classifyPicture()
+{
+     //read image for classification
+    cv::Mat img = readImage();
+
+    //if could not open the image successfully, then exit.
     if(img.empty())
-       return -1;
+    {
+        cout << "Could not read the image file.";
+        return;
+    }
+
+    //show the source image for user
     cv::namedWindow("picture", cv::WINDOW_AUTOSIZE );
     cv::imshow("picture", img);
     cv::waitKey(0);
@@ -26,13 +62,14 @@ int main(int argc, char *argv[])
 	{
 		cout << "model loading error!" << endl;
 		system("pause");
-		return -1;
+		return;
 	}
 	else
 	{
-		cout << "model loading successed!" << endl;
+		cout << "model loading succeeded!" << endl;
 	}
 
+    //prepaire data for prediction
 	cv::Mat inputBlob = cv::dnn::blobFromImage(
 			img,
 			1.0f,
@@ -40,9 +77,15 @@ int main(int argc, char *argv[])
 			cv::Scalar(104, 117, 128),
 			true,
 			false);
-	cv::Mat prob;
+
+
+	//loading data on net
 	net.setInput(inputBlob);
+
+	//predicting
+	cv::Mat prob;
 	prob = net.forward();
+
 	cout << "prob mat is " << prob << endl;
 	cv::Mat probMat = prob.reshape(1, 1);  //Mat Mat::reshape(cn, rows=0); if cn==0 channel unchange, if rows == 0 rows unchange.
 	cv::Point classNumber;
@@ -54,5 +97,4 @@ int main(int argc, char *argv[])
 	else
 		cout << "fish" << endl;
 
-    return 0;
 }
