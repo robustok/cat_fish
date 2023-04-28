@@ -21,19 +21,17 @@ int main(int argc, char *argv[])
         cout << "Press 'n' for escaping, 'y' for continue." << endl;
         cin >> c ;
         cout << endl;
-
-
     }
 
     return 0;
 }
 
+
 cv::Mat readImage()
 {
     std::string fn;
-    cout << "Input image name for classify:";
+    cout << "Input image file name for classifying: ";
     cin >> fn;
-    cout << fn << endl;
     cv::Mat img = cv::imread(fn, cv::IMREAD_COLOR);
     return img;
 }
@@ -46,7 +44,7 @@ void classifyPicture()
     //if could not open the image successfully, then exit.
     if(img.empty())
     {
-        cout << "Could not read the image file.";
+        cout << "Could not read the image file." << endl;
         return;
     }
 
@@ -64,10 +62,6 @@ void classifyPicture()
 		system("pause");
 		return;
 	}
-	else
-	{
-		cout << "model loading succeeded!" << endl;
-	}
 
     //prepaire data for prediction
 	cv::Mat inputBlob = cv::dnn::blobFromImage(
@@ -78,7 +72,6 @@ void classifyPicture()
 			true,
 			false);
 
-
 	//loading data on net
 	net.setInput(inputBlob);
 
@@ -86,15 +79,15 @@ void classifyPicture()
 	cv::Mat prob;
 	prob = net.forward();
 
-	cout << "prob mat is " << prob << endl;
+	//cout << "prob mat is " << prob << endl;
 	cv::Mat probMat = prob.reshape(1, 1);  //Mat Mat::reshape(cn, rows=0); if cn==0 channel unchange, if rows == 0 rows unchange.
 	cv::Point classNumber;
 	double classProb;
 	cv::minMaxLoc(probMat, NULL, &classProb, NULL, &classNumber);
 	int label_id = classNumber.x;
 	if(label_id == 0)
-		cout << "cat" << endl;
+		cout << "prediction result: cat." << endl << endl;
 	else
-		cout << "fish" << endl;
+		cout << "prediction result: fish." << endl << endl;
 
 }
