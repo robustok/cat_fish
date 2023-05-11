@@ -48,6 +48,7 @@ void classifyPicture()
         return;
     }
 
+
     //show the source image for user
     cv::namedWindow("picture", cv::WINDOW_AUTOSIZE );
     cv::imshow("picture", img);
